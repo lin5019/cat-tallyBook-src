@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <Layout>
     <h1>Statistics.vue</h1>
-    <Nav/>
-  </div>
+  </Layout>
 </template>
 
 <script lang="ts">
@@ -12,6 +11,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
