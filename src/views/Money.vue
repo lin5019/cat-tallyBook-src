@@ -1,6 +1,109 @@
 <template>
-  <div>
-    <h1>Money.vue</h1>
+  <div class="wrapping-nav">
+    <div class="content">
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+      <h1>Money.vue</h1>
+
+
+    </div>
     <Nav/>
   </div>
 </template>
@@ -13,5 +116,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.wrapping-nav{
+  //border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.content {
+  border: 2px solid blue;
+  overflow: auto;
+  //flex只有在父容器有高度的时候才可以分配剩余空间.
+  flex: 1;
+}
 </style>
