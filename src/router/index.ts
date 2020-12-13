@@ -9,30 +9,30 @@ import NotFound from "@/views/NotFound.vue";
 Vue.use(VueRouter)
 
 const routes  = [
-  {
-    path: '/',
-    redirect: 'money'
-  },
-  {
-    path: '/money',
-    component: Money
-  },
-  {
-    path: '/labels',
-    component: Labels
-  },
-  {
-    path: '/statistics',
-    component: Statistics
-  },
-  {
-    path: '*',
-    component: NotFound
-  }
+    {
+        path: '/',
+        redirect: 'money'
+    },
+    {
+        path: '/money',
+        component: Money
+    },
+    {
+        path: '/labels',
+        component: Labels
+    },
+    {
+        path: '/statistics',
+        component: Statistics
+    },
+    {
+        path: '*',
+        component: NotFound
+    }
 ]
 
 const router = new VueRouter({
-  routes
+    routes
 })
 
 export default router
