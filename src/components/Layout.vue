@@ -23,7 +23,7 @@ export default {
   height: 100vh;
 }
 .content {
-  border: 2px solid blue;
+ // border: 2px solid blue;
   overflow: auto;
   //flex只有在父容器有高度的时候才可以分配剩余空间.
   flex: 1;
