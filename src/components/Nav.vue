@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
 nav {
   //border: 2px solid red;
   display: flex;
@@ -44,7 +45,7 @@ nav {
     }
   }
   > .item.selected {
-    color: red;
+    color: $color-heighlight;
   }
 }
 
