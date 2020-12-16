@@ -1,15 +1,41 @@
 <template>
-  <div class="types">
-    <ul>
-      <li class="selected">支出</li>
-      <li>收入</li>
-    </ul>
-  </div>
+
+  <ul class="types">
+    <li
+        :class="type===`-` && 'selected'"
+        @click="selectType('-')"
+    >支出
+    </li>
+    <li
+        :class="type===`+` && 'selected'"
+        @click="selectType('+')"
+    >收入
+    </li>
+  </ul>
+
 </template>
 
-<script lang="ts">
+<script lang="js">
 export default {
-name: "Types"
+  name: "Types",
+  props: ['xxx'],
+  data() {
+    return {
+      type: '-', //type只能是 + 或者 -
+    }
+  },
+  mounted() {
+    console.log(this.xxx)
+  },
+  methods: {
+    selectType(type) {
+      if (type !== '+' && type !== '-') {
+        throw new Error('type is unknown!')
+      }
+      this.type = type
+    }
+  }
+
 }
 </script>
 
@@ -20,30 +46,29 @@ name: "Types"
   height: 64px;
   background: #C4C4C4;
   font-size: 24px;
+  display: flex;
 
-  > ul {
+
+  > li {
+    flex: 1;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 
-    > li {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-
-      &.selected {
-        &::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 100%;
-          height: 4px;
-          background: #333;
-        }
+    &.selected {
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 4px;
+        background: #333;
       }
     }
   }
+
 
 }
 </style>
