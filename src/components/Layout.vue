@@ -1,6 +1,7 @@
 <template>
-  <div class="wrapping-nav">
-    <div class="content">
+  <div class="layout-wrapping">
+    <div class="content" :class="classPrefix
+      && `${classPrefix}-content`">
       <slot/>
     </div>
     <Nav/>
@@ -11,21 +12,24 @@
 
 export default {
   name: "Layout",
+  props: ['classPrefix']
 }
 </script>
 
 
 <style lang="scss" scoped>
-.wrapping-nav{
+.layout-wrapping {
   //border: 2px solid red;
   display: flex;
   flex-direction: column;
   height: 100vh;
+
+  > .content {
+   // border: 1px solid blue;
+    overflow: auto;
+    //flex只有在父容器有高度的时候才可以分配剩余空间.
+    flex: 1;
+  }
 }
-.content {
- // border: 2px solid blue;
-  overflow: auto;
-  //flex只有在父容器有高度的时候才可以分配剩余空间.
-  flex: 1;
-}
+
 </style>

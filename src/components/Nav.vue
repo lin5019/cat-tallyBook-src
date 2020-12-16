@@ -29,7 +29,7 @@ nav {
   //border: 2px solid red;
   display: flex;
   font-size: 16px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+  @extend %outerShadow;
 
   > .item {
     //border: 2px solid blue;
@@ -45,7 +45,7 @@ nav {
     }
   }
   > .item.selected {
-    color: $color-heighlight;
+    color: $color-highlight;
   }
 }
 
