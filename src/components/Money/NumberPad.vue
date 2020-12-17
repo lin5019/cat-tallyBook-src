@@ -1,7 +1,7 @@
 <template>
   <div class="numberPad">
-    <div class="output">1100</div>
-    <ul class="buttons">
+    <div class="output">{{ outputValue }}</div>
+    <ul @click="inputContent" class="buttons">
       <li>1</li>
       <li>2</li>
       <li>3</li>
@@ -21,13 +21,53 @@
 </template>
 
 <script lang="ts">
-export default {
-name: "NumberPad"
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+
+@Component
+export default class NumberPad extends Vue {
+  outputValue = '0';
+
+  inputContent(event: MouseEvent) {
+    const button = event.target as HTMLButtonElement;
+    const inputValue = button.textContent!;
+    if (this.outputValue === '0' && '0123456789'.indexOf(inputValue) > -1) {
+      this.outputValue = inputValue;
+      return;
+    }
+    if (this.outputValue.length === 16 || '0123456789'.indexOf(inputValue) === -1) {
+      if (inputValue === '删除') {
+        this.delete();
+      } else if (inputValue === '清空') {
+        this.clear();
+      }else  if (this.outputValue.indexOf('.') === -1 && inputValue === '.') {
+        this.outputValue += inputValue;
+      }
+      return;
+    }
+
+    this.outputValue += inputValue;
+  }
+
+  clear() {
+    this.outputValue = '0';
+  }
+
+  delete() {
+    if (this.outputValue.length === 1) {
+      this.outputValue = '0';
+    }else {
+      this.outputValue = this.outputValue.slice(0, -1);
+    }
+  }
+
+
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+
 .numberPad {
   //border: 1px solid red;
 
