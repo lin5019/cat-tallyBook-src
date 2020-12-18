@@ -1,7 +1,6 @@
 <template>
   <Layout class-prefix="layout">
-    <Tags :data-source="tags"
-          @update:dataSource="tags=$event"/>
+    <Tags :data-source.sync="tags" />
     <Notes/>
     <Types/>
     <NumberPad/>
