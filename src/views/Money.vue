@@ -1,8 +1,9 @@
 <template>
   <Layout class-prefix="layout">
-    <Tags :data-source="tags"/>
+    <Tags :data-source="tags"
+          @update:dataSource="tags=$event"/>
     <Notes/>
-    <Types />
+    <Types/>
     <NumberPad/>
   </Layout>
 </template>
@@ -17,11 +18,12 @@ import NumberPad from '@/components/Money/NumberPad.vue';
 export default {
   name: 'Money',
   components: {NumberPad, Types, Notes, Tags},
-  data(){
+  data() {
     return {
-      tags: ['衣','食','住','行']
-    }
-  }
+      tags: ['衣', '食', '住', '行']
+    };
+  },
+  methods: {}
 };
 </script>
 <style>

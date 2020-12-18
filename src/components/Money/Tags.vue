@@ -4,11 +4,11 @@
       <li v-for="tag in dataSource"
           :key="tag"
           @click="toggle(tag)"
-          :class="toggleArray.indexOf(tag)>-1 && 'selected' ">
+          :class="{selected: toggleArray.indexOf(tag)>-1}">
         {{ tag }}
       </li>
     </ul>
-    <div class="tags-new">
+    <div class="tags-new" @click="create">
       <button>新建标签</button>
     </div>
   </div>
@@ -23,14 +23,26 @@ export default class Tags extends Vue {
   @Prop(Array) dataSource: string[] | undefined;
   toggleArray: string[] = [];
 
+
   toggle(tag: string) {
     const index = this.toggleArray.indexOf(tag);
     if (index > -1) {
       this.toggleArray.splice(index, 1);
-      return
+    } else {
+      this.toggleArray.push(tag);
     }
-    this.toggleArray.push(tag);
   }
+
+  create() {
+    let newTagName = window.prompt('请输入标签名');
+    if (newTagName && this.dataSource) {
+      newTagName=newTagName.trim();
+      if (this.dataSource.indexOf(newTagName) === -1) {
+        this.$emit('update:dataSource', [...this.dataSource, newTagName]);
+      }
+    }
+  }
+
 
 }
 </script>
