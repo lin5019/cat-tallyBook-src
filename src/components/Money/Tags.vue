@@ -16,13 +16,17 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue {
   @Prop(Array) dataSource: string[] | undefined;
   toggleArray: string[] = [];
 
+  @Watch('toggleArray')
+  onChildChanged(value: string) {
+    this.$emit('update:value',value)
+  }
 
   toggle(tag: string) {
     const index = this.toggleArray.indexOf(tag);

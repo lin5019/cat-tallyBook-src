@@ -30,7 +30,7 @@ export default class NumberPad extends Vue {
 
   inputContent(event: MouseEvent) {
     const button = event.target as HTMLButtonElement;
-    const inputValue = button.textContent!;
+    const inputValue = button.textContent as string;
     if (this.outputValue === '0' && '0123456789'.indexOf(inputValue) > -1) {
       this.outputValue = inputValue;
       return;
@@ -42,6 +42,8 @@ export default class NumberPad extends Vue {
         this.clear();
       }else  if (this.outputValue.indexOf('.') === -1 && inputValue === '.') {
         this.outputValue += inputValue;
+      }else if(inputValue === 'ok'){
+        this.ok()
       }
       return;
     }
@@ -60,7 +62,9 @@ export default class NumberPad extends Vue {
       this.outputValue = this.outputValue.slice(0, -1);
     }
   }
-
+  ok(){
+    this.$emit('update:value',this.outputValue)
+  }
 
 }
 </script>
