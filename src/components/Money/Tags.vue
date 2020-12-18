@@ -1,22 +1,12 @@
 <template>
   <div class="tags">
     <ul class="tags-content">
-      <li class="tags-item">衣</li>
-      <li class="tags-item">食</li>
-      <li class="tags-item">住</li>
-      <li class="tags-item">行</li>
-      <li class="tags-item">衣</li>
-      <li class="tags-item">食</li>
-      <li class="tags-item">住</li>
-      <li class="tags-item">行</li>
-      <li class="tags-item">衣</li>
-      <li class="tags-item">食</li>
-      <li class="tags-item">住</li>
-      <li class="tags-item">行</li>
-      <li class="tags-item">衣</li>
-      <li class="tags-item">食</li>
-      <li class="tags-item">住</li>
-      <li class="tags-item">行</li>
+      <li v-for="tag in dataSource"
+          :key="tag"
+          @click="toggle(tag)"
+          :class="toggleArray.indexOf(tag)>-1 && 'selected' ">
+        {{ tag }}
+      </li>
     </ul>
     <div class="tags-new">
       <button>新建标签</button>
@@ -25,8 +15,23 @@
 </template>
 
 <script lang="ts">
-export default {
-name: "Tags"
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
+
+@Component
+export default class Tags extends Vue {
+  @Prop(Array) dataSource: string[] | undefined;
+  toggleArray: string[] = [];
+
+  toggle(tag: string) {
+    const index = this.toggleArray.indexOf(tag);
+    if (index > -1) {
+      this.toggleArray.splice(index, 1);
+      return
+    }
+    this.toggleArray.push(tag);
+  }
+
 }
 </script>
 
@@ -45,8 +50,9 @@ name: "Tags"
     display: flex;
     flex-wrap: wrap;
 
-    > .tags-item {
-      background: #D9D9D9;
+    > li {
+      $bg: #D9D9D9;
+      background: $bg;
       $h: 24px;
       height: $h;
       line-height: $h;
@@ -54,6 +60,10 @@ name: "Tags"
       padding: 0 16px;
       margin-right: 14px;
       margin-top: 2px;
+
+      &.selected {
+        background: darken($bg, 20%);
+      }
     }
   }
 
