@@ -22,7 +22,7 @@ type Record = {
   tags: string[];
   notes: string;
   type: string;
-  amount: string;
+  amount: number;
 }
 
 
@@ -36,7 +36,7 @@ export default class Money extends Vue {
     tags:[],
     notes:'',
     type: '-',
-    amount: '0'
+    amount: 0
   }
 }
 </script>

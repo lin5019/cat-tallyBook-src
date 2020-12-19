@@ -12,7 +12,7 @@ import Vue from 'vue'
 import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Notes extends Vue {
-  @Prop(String) value!: string
+  @Prop(String) readonly value!: string
 }
 </script>
 
