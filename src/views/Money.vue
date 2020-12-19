@@ -5,7 +5,7 @@
           @update:value="OnUpdateTags"
     />
     <Notes @update:value="OnUpdateNotes"/>
-    <Types @update:value="OnUpdateType"/>
+    <Types :value.sync="record.type"/>
     <NumberPad @update:value="OnUpdateOutput"/>
   </Layout>
 </template>
@@ -16,7 +16,7 @@ import Tags from '@/components/Money/Tags.vue';
 import Notes from '@/components/Money/Notes.vue';
 import Types from '@/components/Money/Types.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 
 type Record = {
   tags: string[];
@@ -30,11 +30,13 @@ type Record = {
   components: {NumberPad, Types, Notes, Tags},
 })
 export default class Money extends Vue {
-  tags: string[] = ['衣', '食', '住', '行'];
+  tags: string[] = ['衣', '食', '住', '行','衣', '食', '住', '行'
+  ];
+  //type = '-'; //'-' 表示支出,'+' 表示收入
   record: Record ={
     tags:[],
     notes:'',
-    type: '',
+    type: '-',
     amount: 0
   }
   OnUpdateTags(e: string[]) {
@@ -44,22 +46,21 @@ export default class Money extends Vue {
   OnUpdateNotes(e: string) {
     this.record.notes=e
   }
-
-  OnUpdateType(e: string) {
-    this.record.type=e
-  }
-
+  // @Watch('type')
+  // onChildChanged(value: string) {
+  //   this.record.type=value
+  // }
   OnUpdateOutput(e: string) {
     this.record.amount=parseFloat(e)
   }
 }
 </script>
-<!--<style>-->
-<!--.layout-content {-->
-<!--  display: flex;-->
-<!--  flex-direction: column;-->
-<!--}-->
-<!--</style>-->
+<style>
+.layout-content {
+  display: flex;
+  flex-direction: column;
+}
+</style>
 <style lang="scss" scoped>
 
 </style>

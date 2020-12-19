@@ -20,7 +20,7 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
 
 @Component
 export default class Tags extends Vue {
-  @Prop(Array) dataSource: string[] | undefined;
+  @Prop(Array) readonly dataSource!: string[];
   toggleArray: string[] = [];
 
   @Watch('toggleArray')
