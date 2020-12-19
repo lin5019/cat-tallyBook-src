@@ -24,7 +24,7 @@ export default class Tags extends Vue {
   toggleArray: string[] = [];
 
   @Watch('toggleArray')
-  onChildChanged(value: string) {
+  onToggleArrayChanged(value: string) {
     this.$emit('update:value',value)
   }
 

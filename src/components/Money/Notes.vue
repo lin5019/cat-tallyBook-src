@@ -2,20 +2,17 @@
   <label class="notes">
     <span class="name">备注</span>
     <input type="text" placeholder="在这里添加备注"
-           v-model="value"/>
+           :value="value"
+            @input="$emit('update:value',$event.target.value)"/>
   </label>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import {Component, Watch} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 @Component
 export default class Notes extends Vue {
-  value = ''
-  @Watch('value')
-  onChildChanged(value: string) {
-    this.$emit('update:value',value)
-  }
+  @Prop(String) value!: string
 }
 </script>
 
