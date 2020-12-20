@@ -1,6 +1,5 @@
 <template>
   <Layout class-prefix="layout">
-    {{recordList}}
     <Tags :data-source.sync="tags"
          :value.sync="record.tags"
     />
