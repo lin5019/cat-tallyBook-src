@@ -10,6 +10,7 @@ import {Component} from 'vue-property-decorator'
 import tagsModel from '@/model/tagsListModel';
 @Component
 export default class EditLabel extends Vue{
+  //currentTag: Tag
   created(){
     const id = this.$route.params.id;
     console.log(id);
@@ -18,7 +19,7 @@ export default class EditLabel extends Vue{
       console.log(tagsModel.data);
       const item = tagsModel.data.filter(i=> i.id===id)[0];
       if(item){
-        console.log(item);
+       // this.currentTag=item
       }else {
         this.$router.push('/404')
       }

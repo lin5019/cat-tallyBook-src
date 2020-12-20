@@ -3,7 +3,9 @@
     <Tags :data-source.sync="tags"
          :value.sync="record.tags"
     />
-    <Notes :value.sync ="record.notes"/>
+    <Notes field-name="备注"
+           placeholder="请填写备注..."
+           :value.sync ="record.notes"/>
     <Types :value.sync="record.type"/>
     <NumberPad :value.sync="record.amount"  @update:submit="saveRecord"/>
   </Layout>
