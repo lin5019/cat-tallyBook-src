@@ -1,8 +1,9 @@
 <template>
   <Layout>
     <ul class="tags">
-      <li v-for="tag in tags" :key="tag">
-        <span>{{ tag }}</span>
+      {{tags}}
+      <li v-for="tag in tags" :key="tag.id">
+        <span>{{ tag.name }}</span>
         <Icon name="right"/>
       </li>
     </ul>
@@ -15,11 +16,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator';
-import tagsModel from '@/model/tagsModel';
+import tagsModel from '@/model/tagsListModel';
 
 @Component
 export default class Labels extends Vue{
-  tags: string[] =tagsModel.fetch()
+  tags =tagsModel.fetch()
   create(){
     const prompt = window.prompt('请输入标签名');
     if(prompt){
