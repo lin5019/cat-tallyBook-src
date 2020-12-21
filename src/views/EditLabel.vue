@@ -1,11 +1,11 @@
 <template>
   <Layout class-prefix="layout">
-    <router-link class="navbar" to="/labels" >
+    <router-link class="navbar" to="/labels">
       <Icon class="leftIcon" name="left"/>
       <span class="title">编辑标签</span>
       <div class="rightIcon"></div>
     </router-link>
-    <FormItem class="form" field-name="标签名" placeholder="请输入标签名"/>
+    <FormItem @update:value="updateTag"   :value="tag.name" class="form" field-name="标签名" placeholder="请输入标签名"/>
     <Button class="button">删除标签</Button>
   </Layout>
 </template>
@@ -21,29 +21,32 @@ import Button from '@/components/Button.vue';
   components: {Button, FormItem}
 })
 export default class EditLabel extends Vue {
-  //currentTag: Tag
+  tag?: { id: string; name: string } = undefined;
+
   created() {
     const id = this.$route.params.id;
-    console.log(id);
     if (id) {
       tagsModel.fetch();
-      console.log(tagsModel.data);
-      const item = tagsModel.data.filter(i => i.id === id)[0];
-      if (item) {
-        // this.currentTag=item
+      const tag = tagsModel.data.filter(i => i.id === id)[0];
+      if (tag) {
+        this.tag = tag;
       } else {
         this.$router.push('/404');
       }
     }
   }
-  backLabel(){
-    this.$router.push('/404');
+  updateTag(value: string){
+
+    if(this.tag){
+      console.log(tagsModel.update(this.tag.id,value));
+    }
+
   }
+
 }
 </script>
 <style>
 .layout-content {
-  //border: 1px solid blue;
   position: relative;
 }
 
@@ -58,14 +61,17 @@ export default class EditLabel extends Vue {
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
+
   > .leftIcon {
     width: 24px;
     height: 24px;
   }
-  > .rightIcon{
+
+  > .rightIcon {
     width: 24px;
     height: 24px;
   }
+
   > .title {
   }
 
@@ -76,6 +82,7 @@ export default class EditLabel extends Vue {
   background: #fff;
   line-height: 44px;
 }
+
 .button {
   position: absolute;
   top: 25%;
