@@ -41,7 +41,7 @@ export default class Types extends Vue {
   //border: 1px solid red;
   line-height: 64px;
   height: 64px;
-  background: #C4C4C4;
+  background: #c4c4c4;
   font-size: 24px;
   display: flex;
 

@@ -3,7 +3,9 @@
     <Tags :data-source.sync="tags"
          :value.sync="record.tags"
     />
-    <Notes field-name="备注"
+    <FormItem
+          class="form"
+            field-name="备注"
            placeholder="请填写备注..."
            :value.sync ="record.notes"/>
     <Types :value.sync="record.type"/>
@@ -14,7 +16,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Tags from '@/components/Money/Tags.vue';
-import Notes from '@/components/Money/Notes.vue';
+import FormItem from '@/components/Money/FormItem.vue';
 import Types from '@/components/Money/Types.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
@@ -22,7 +24,7 @@ import recordListModel from '@/model/recordListModel';
 
 
 @Component({
-  components: {NumberPad, Types, Notes, Tags},
+  components: {NumberPad, Types, FormItem, Tags},
 })
 export default class Money extends Vue {
   tags: string[] = ['衣', '食', '住', '行'];
@@ -53,5 +55,8 @@ export default class Money extends Vue {
 }
 </style>
 <style lang="scss" scoped>
-
+.form {
+  line-height: 64px;
+  background: #f5f5f5;
+}
 </style>

@@ -1,7 +1,6 @@
 <template>
   <Layout>
     <div class="tags">
-      {{tags}}
       <router-link class="tag"
                    v-for="tag in tags"
                    :key="tag.id"
@@ -11,7 +10,7 @@
       </router-link>
     </div>
     <div class="createTag-wrapper">
-      <button class="createTag" @click="create">新建标签</button>
+      <Button class="createTag" @click="create">新建标签</Button>
     </div>
   </Layout>
 </template>
@@ -20,8 +19,10 @@
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator';
 import tagsModel from '@/model/tagsListModel';
-
-@Component
+import Button from '@/components/Button.vue';
+@Component({
+  components: {Button}
+})
 export default class Labels extends Vue{
   tags =tagsModel.fetch()
   create(){
@@ -56,11 +57,6 @@ export default class Labels extends Vue{
   }
 }
 .createTag {
-  padding: 8px 16px;
-  background: #767676;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
   &-wrapper{
     //border: 1px solid red;
     text-align: center;

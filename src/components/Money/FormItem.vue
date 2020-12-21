@@ -12,7 +12,7 @@
 import Vue from 'vue'
 import {Component, Prop} from 'vue-property-decorator';
 @Component
-export default class Notes extends Vue {
+export default class FormItem extends Vue {
   @Prop(String) readonly value!: string
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
@@ -27,8 +27,6 @@ export default class Notes extends Vue {
   align-items: center;
   padding-left: 16px;
   font-size: 14px;
-  background: #E5E5E5;
-  height: 64px;
 
   > .name {
 
@@ -36,8 +34,8 @@ export default class Notes extends Vue {
 
   > input {
     flex: 1;
-    line-height: 64px;
-    background: #E5E5E5;
+    line-height: inherit;
+    background: inherit;
     border: none;
     padding: 0 16px;
   }
