@@ -6,7 +6,7 @@
       <div class="rightIcon"></div>
     </router-link>
     <FormItem @update:value="updateTag"   :value="tag.name" class="form" field-name="标签名" placeholder="请输入标签名"/>
-    <Button class="button">删除标签</Button>
+    <Button class="button" @click="deleteTag">删除标签</Button>
   </Layout>
 </template>
 
@@ -32,17 +32,23 @@ export default class EditLabel extends Vue {
         this.tag = tag;
       } else {
         this.$router.push('/404');
+
       }
     }
   }
-  updateTag(value: string){
-
+  updateTag(name: string){
     if(this.tag){
-      console.log(tagsModel.update(this.tag.id,value));
+      console.log(tagsModel.update(this.tag.id,name));
     }
-
   }
-
+  deleteTag(){
+    if(this.tag){
+      const b = tagsModel.remove(this.tag.id);
+      if(b){
+        this.$router.go(-1)
+      }
+    }
+  }
 }
 </script>
 <style>

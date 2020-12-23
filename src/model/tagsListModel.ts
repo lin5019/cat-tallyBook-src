@@ -1,3 +1,5 @@
+import createId from '@/lib/idCreate';
+
 const localStorageKeyName = 'tagsList';
 type Tag = {
     id: string;
@@ -9,7 +11,8 @@ type TagsListModel = {
     fetch: () => Tag[];
     save: () => void;
     create: (name: string) => 'success' | 'repetition';
-    update(): (id: string, name: string) => 'success' | 'repetition' | 'not found';
+    update: (id: string, name: string) => 'success' | 'repetition' | 'not found';
+    remove: (id: string) => boolean;
 }
 
 const tagsModel: TagsListModel = {
@@ -24,7 +27,8 @@ const tagsModel: TagsListModel = {
     create(name) {
         const names = this.data.map((item) => item.name);
         if (names.indexOf(name) === -1) {
-            this.data.push({id: name, name: name});
+            const id = createId();
+            this.data.push({id, name: name});
             this.save();
             return 'success';
         } else {
@@ -43,7 +47,20 @@ const tagsModel: TagsListModel = {
         }else {
             return 'not found'
         }
-    }
+    },
+    remove(id: string){
+
+        for (let i = 0; i <this.data.length ; i++) {
+            if(this.data[i].id===id){
+                const deleteItem = this.data.splice(i,1)[0];
+                //console.log(deleteItem);
+                this.save()
+                return true
+            }
+        }
+        return false
+    },
+
 };
 
 export default tagsModel;
