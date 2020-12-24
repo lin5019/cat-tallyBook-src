@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix="layout">
-    <Tags :data-source.sync="tags"
+    <Tags :dataSource.sync="tags"
          :value.sync="record.tags"
     />
     <FormItem
@@ -21,13 +21,15 @@ import Types from '@/components/Money/Types.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '@/model/recordListModel';
+// import tagsListModel from '@/model/tagsListModel';
+
 
 
 @Component({
   components: {NumberPad, Types, FormItem, Tags},
 })
 export default class Money extends Vue {
-  tags: string[] = ['衣', '食', '住', '行'];
+  tags: string[] = window.tagList.map(i=>i.name)
   //type = '-'; //'-' 表示支出,'+' 表示收入
   record: RecordItem ={
     tags:[],
@@ -37,15 +39,12 @@ export default class Money extends Vue {
   }
   recordList = recordListModel.fetch()
   saveRecord(){
-    const record2: RecordItem = recordListModel.clone(this.record)
-    record2.createAt= new Date()
-    this.recordList.push(record2)
+    recordListModel.create(this.record)
   }
   @Watch('recordList')
   onRecordListChanged(){
-    recordListModel.save(this.recordList)
+    recordListModel.save()
   }
-
 }
 </script>
 <style>

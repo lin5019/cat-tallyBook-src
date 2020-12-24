@@ -17,6 +17,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
+import tagsListModel from '@/model/tagsListModel';
 
 @Component
 export default class Tags extends Vue {
@@ -38,12 +39,11 @@ export default class Tags extends Vue {
   }
 
   create() {
-    let newTagName = window.prompt('请输入标签名');
-    if (newTagName && this.dataSource) {
-      newTagName=newTagName.trim();
-      if (this.dataSource.indexOf(newTagName) === -1) {
-        this.$emit('update:dataSource', [...this.dataSource, newTagName]);
-      }
+    const newTagName = window.prompt('请输入标签名');
+    if (newTagName) {
+      tagsListModel.create(newTagName)
+      const tags = tagsListModel.fetch();
+      this.$emit('update:dataSource', tags.map(i=>i.name));
     }
   }
 
