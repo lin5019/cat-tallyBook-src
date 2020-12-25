@@ -29,7 +29,7 @@ import recordListModel from '@/model/recordListModel';
   components: {NumberPad, Types, FormItem, Tags},
 })
 export default class Money extends Vue {
-  tags: string[] = window.tagList.map(i=>i.name)
+  tags = window.tagList
   //type = '-'; //'-' 表示支出,'+' 表示收入
   record: RecordItem ={
     tags:[],

@@ -18,7 +18,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator';
-import tagsListModel from '@/model/tagsListModel';
 import Button from '@/components/Button.vue';
 @Component({
   components: {Button}
@@ -26,12 +25,9 @@ import Button from '@/components/Button.vue';
 export default class Labels extends Vue{
   tags =window.tagList
   create(){
-    const prompt = window.prompt('请输入标签名');
-    if(prompt){
-      const message = tagsListModel.create(prompt);
-      if(message==='repetition'){
-        window.alert('不可以添加重复标签')
-      }
+    const newTagName = window.prompt('请输入标签名');
+    if(newTagName){
+      window.createTag(newTagName)
     }
   }
 }

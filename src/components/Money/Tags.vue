@@ -2,10 +2,10 @@
   <div class="tags">
     <ul class="tags-content">
       <li v-for="tag in dataSource"
-          :key="tag"
-          @click="toggle(tag)"
-          :class="{selected: toggleArray.indexOf(tag)>-1}">
-        {{ tag }}
+          :key="tag.id"
+          @click="toggle(tag.id)"
+          :class="{selected: toggleArray.indexOf(tag.id)>-1}">
+        {{ tag.name }}
       </li>
     </ul>
     <div class="tags-new" @click="create">
@@ -17,11 +17,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
-import tagsListModel from '@/model/tagsListModel';
+
 
 @Component
 export default class Tags extends Vue {
-  @Prop(Array) readonly dataSource!: string[];
+  @Prop(Array) readonly dataSource!: Tag[];
   toggleArray: string[] = [];
 
   @Watch('toggleArray')
@@ -29,21 +29,19 @@ export default class Tags extends Vue {
     this.$emit('update:value',value)
   }
 
-  toggle(tag: string) {
-    const index = this.toggleArray.indexOf(tag);
+  toggle(tagId: string) {
+    const index = this.toggleArray.indexOf(tagId);
     if (index > -1) {
       this.toggleArray.splice(index, 1);
     } else {
-      this.toggleArray.push(tag);
+      this.toggleArray.push(tagId);
     }
   }
 
   create() {
     const newTagName = window.prompt('请输入标签名');
     if (newTagName) {
-      tagsListModel.create(newTagName)
-      const tags = tagsListModel.fetch();
-      this.$emit('update:dataSource', tags.map(i=>i.name));
+      window.createTag(newTagName)
     }
   }
 
