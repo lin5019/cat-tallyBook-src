@@ -22,4 +22,7 @@ type TagsListModel = {
 interface Window {
     tagList: Tag[];
     createTag: (name: string) => void;
+    remove: (id: string) => boolean;
+    update: (id: string, name: string) => 'success' | 'repetition' | 'not found';
+    findTag: (id: string) => Tag | undefined;
 }

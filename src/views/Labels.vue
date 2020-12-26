@@ -46,7 +46,8 @@ export default class Labels extends Vue{
     justify-content: space-between;
     color: #333;
     > .icon {
-      font-size: 22px;
+      width: 24px;
+      height: 24px;
       margin-right: 16px;
       color: #888;
     }

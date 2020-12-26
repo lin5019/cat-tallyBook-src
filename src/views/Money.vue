@@ -21,7 +21,7 @@ import Types from '@/components/Money/Types.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '@/model/recordListModel';
-// import tagsListModel from '@/model/tagsListModel';
+
 
 
 
