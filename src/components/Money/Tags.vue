@@ -17,6 +17,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
+import store from '@/store/index2';
 
 
 @Component
@@ -41,7 +42,7 @@ export default class Tags extends Vue {
   create() {
     const newTagName = window.prompt('请输入标签名');
     if (newTagName) {
-      window.createTag(newTagName)
+      store.createTag(newTagName)
     }
   }
 

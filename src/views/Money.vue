@@ -9,7 +9,7 @@
            placeholder="请填写备注..."
            :value.sync ="record.notes"/>
     <Types :value.sync="record.type"/>
-    <NumberPad :value.sync="record.amount"  @update:submit="saveRecord"/>
+    <NumberPad :value.sync="record.amount"  @update:submit="createRecord"/>
   </Layout>
 </template>
 
@@ -21,6 +21,7 @@ import Types from '@/components/Money/Types.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '@/model/recordListModel';
+import store from '@/store/index2';
 
 
 
@@ -29,7 +30,7 @@ import recordListModel from '@/model/recordListModel';
   components: {NumberPad, Types, FormItem, Tags},
 })
 export default class Money extends Vue {
-  tags = window.tagList
+  tags = store.tagList
   //type = '-'; //'-' 表示支出,'+' 表示收入
   record: RecordItem ={
     tags:[],
@@ -37,13 +38,9 @@ export default class Money extends Vue {
     type: '-',
     amount: 0
   }
-  recordList = recordListModel.fetch()
-  saveRecord(){
-    recordListModel.create(this.record)
-  }
-  @Watch('recordList')
-  onRecordListChanged(){
-    recordListModel.save()
+  recordList = store.recordList
+  createRecord(){
+    store.createRecord(this.record)
   }
 }
 </script>

@@ -6,32 +6,13 @@ import store from './store'
 import Nav from "@/components/Nav.vue";
 import Layout from "@/components/Layout.vue";
 import Icon from "@/components/Icon.vue";
-import tagsListModel from '@/model/tagsListModel';
+
 
 Vue.config.productionTip = false
 
 Vue.component('Nav',Nav)
 Vue.component('Layout',Layout)
 Vue.component('Icon',Icon)
-
-window.tagList =tagsListModel.fetch();
-window.createTag=(name)=>{
-  const message = tagsListModel.create(name);
-    if(message==='repetition'){
-      window.alert('不可以添加重复标签')
-    }else {
-      window.alert('添加成功')
-    }
-}
-window.remove=(id)=>{
-  return  tagsListModel.remove(id);
-}
-window.update=(id,name)=>{
-  return tagsListModel.update(id,name);
-}
-window.findTag = (id: string)=>{
-  return window.tagList.filter(i => i.id === id)[0]
-}
 
 
 
