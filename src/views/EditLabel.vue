@@ -21,10 +21,9 @@ import store from '@/store/index2';
   components: {Button, FormItem}
 })
 export default class EditLabel extends Vue {
-  tag: Tag = undefined
+  tag: Tag = store.findTag(this.$route.params.id);
 
   created() {
-    this.tag=store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.push('/404');
     }

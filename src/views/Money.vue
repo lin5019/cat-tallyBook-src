@@ -1,5 +1,7 @@
 <template>
   <Layout class-prefix="layout">
+    {{count}}
+    <button @click="add">+</button>
     <Tags :dataSource.sync="tags"
          :value.sync="record.tags"
     />
@@ -27,8 +29,16 @@ import store from '@/store/index2';
 
 @Component({
   components: {NumberPad, Types, FormItem, Tags},
+  computed: {
+    count(){
+      return this.$store.state.count
+    }
+  }
 })
 export default class Money extends Vue {
+  add(){
+    this.$store.commit('increase',1)
+  }
   tags = store.tagList
   //type = '-'; //'-' 表示支出,'+' 表示收入
   record: RecordItem ={
