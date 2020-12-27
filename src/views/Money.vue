@@ -1,17 +1,13 @@
 <template>
   <Layout class-prefix="layout">
-    {{count}}
-    <button @click="add">+</button>
-    <Tags :dataSource.sync="tags"
-         :value.sync="record.tags"
-    />
+    <Tags :value.sync="record.tags"/>
     <FormItem
-          class="form"
-            field-name="备注"
-           placeholder="请填写备注..."
-           :value.sync ="record.notes"/>
+        class="form"
+        field-name="备注"
+        placeholder="请填写备注..."
+        :value.sync="record.notes"/>
     <Types :value.sync="record.type"/>
-    <NumberPad :value.sync="record.amount"  @update:submit="createRecord"/>
+    <NumberPad :value.sync="record.amount" @update:submit="createRecord"/>
   </Layout>
 </template>
 
@@ -22,34 +18,26 @@ import FormItem from '@/components/Money/FormItem.vue';
 import Types from '@/components/Money/Types.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import {Component} from 'vue-property-decorator';
-import store from '@/store/index2';
-
-
 
 
 @Component({
   components: {NumberPad, Types, FormItem, Tags},
   computed: {
-    count(){
-      return this.$store.state.count
-    }
+    recordList(){
+      return this.$store.state.recordList;
+    },
   }
 })
 export default class Money extends Vue {
-  add(){
-    this.$store.commit('increase',1)
-  }
-  tags = store.tagList
   //type = '-'; //'-' 表示支出,'+' 表示收入
-  record: RecordItem ={
-    tags:[],
-    notes:'',
+  record: RecordItem = {
+    tags: [],
+    notes: '',
     type: '-',
     amount: 0
-  }
-  recordList = store.recordList
-  createRecord(){
-    store.createRecord(this.record)
+  };
+  createRecord() {
+    this.$store.commit('createRecord',this.record)
   }
 }
 </script>

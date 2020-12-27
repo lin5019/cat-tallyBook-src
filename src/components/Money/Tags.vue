@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <ul class="tags-content">
-      <li v-for="tag in dataSource"
+      <li v-for="tag in tags"
           :key="tag.id"
           @click="toggle(tag.id)"
           :class="{selected: toggleArray.indexOf(tag.id)>-1}">
@@ -17,18 +17,24 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
-import store from '@/store/index2';
 
 
-@Component
+
+@Component({
+  computed: {
+    tags(){
+      return this.$store.state.tagList
+    }
+  }
+})
 export default class Tags extends Vue {
-  @Prop(Array) readonly dataSource!: Tag[];
+
   toggleArray: string[] = [];
 
-  @Watch('toggleArray')
-  onToggleArrayChanged(value: string) {
-    this.$emit('update:value',value)
-  }
+  // @Watch('toggleArray')
+  // onToggleArrayChanged(value: string) {
+  //   this.$emit('update:value',value)
+  // }
 
   toggle(tagId: string) {
     const index = this.toggleArray.indexOf(tagId);
@@ -37,12 +43,13 @@ export default class Tags extends Vue {
     } else {
       this.toggleArray.push(tagId);
     }
+    this.$emit('update:value',this.toggleArray)
   }
 
   create() {
     const newTagName = window.prompt('请输入标签名');
     if (newTagName) {
-      store.createTag(newTagName)
+      this.$store.commit('createTag',newTagName)
     }
   }
 

@@ -10,19 +10,19 @@ type Tag = {
     name: string;
 }
 
-type TagsListModel = {
-    data: Tag[];
-    fetch: () => Tag[];
-    create: (name: string) => 'success' | 'repetition';
-    update: (id: string, name: string) => 'success' | 'repetition' | 'not found';
-    remove: (id: string) => boolean;
-    save: () => void;
-}
-//注意大写
-interface Window {
-    tagList: Tag[];
-    createTag: (name: string) => void;
-    remove: (id: string) => boolean;
-    update: (id: string, name: string) => 'success' | 'repetition' | 'not found';
-    findTag: (id: string) => Tag | undefined;
-}
+// type TagsListModel = {
+//     data: Tag[];
+//     fetch: () => Tag[];
+//     create: (name: string) => 'success' | 'repetition';
+//     update: (id: string, name: string) => 'success' | 'repetition' | 'not found';
+//     remove: (id: string) => boolean;
+//     save: () => void;
+// }
+// //注意大写
+// interface Window {
+//     tagList: Tag[];
+//     createTag: (name: string) => void;
+//     remove: (id: string) => boolean;
+//     update: (id: string, name: string) => 'success' | 'repetition' | 'not found';
+//     findTag: (id: string) => Tag | undefined;
+// }
