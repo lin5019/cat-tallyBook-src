@@ -8,15 +8,15 @@
         {{ tag.name }}
       </li>
     </ul>
-    <div class="tags-new" @click="create">
+    <div class="tags-new" @click="createTag">
       <button>新建标签</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Component, Prop, Watch} from 'vue-property-decorator';
+import {Component, Mixins} from 'vue-property-decorator';
+import TagHelper from '@/mixins/TagHelper';
 
 
 
@@ -27,7 +27,7 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
     }
   }
 })
-export default class Tags extends Vue {
+export default class Tags extends Mixins(TagHelper) {
 
   toggleArray: string[] = [];
 
@@ -46,12 +46,6 @@ export default class Tags extends Vue {
     this.$emit('update:value',this.toggleArray)
   }
 
-  create() {
-    const newTagName = window.prompt('请输入标签名');
-    if (newTagName) {
-      this.$store.commit('createTag',newTagName)
-    }
-  }
 
 
 }
