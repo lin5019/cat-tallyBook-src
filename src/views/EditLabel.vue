@@ -19,11 +19,13 @@ import Button from '@/components/Button.vue';
 
 @Component({
   components: {Button, FormItem},
+  computed: {
+    tag() {
+      return this.$store.state.currentTag;
+    }
+  }
 })
 export default class EditLabel extends Vue {
-  get tag() {
-    return this.$store.state.currentTag;
-  }
   created() {
     this.$store.commit('setCurrentTag',this.$route.params.id);
     if (!this.tag) {
