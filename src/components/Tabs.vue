@@ -3,6 +3,7 @@
     <li v-for="item in array" :key="item.value"
         :class="liClass(item)"
         @click="select(item)"
+        class="tabs-item"
     >{{ item.text }}
     </li>
   </ul>
@@ -35,13 +36,13 @@ export default class Tabs extends Vue {
 <style lang="scss" scoped>
 .tabs {
   //border: 1px solid red;
-  line-height: 64px;
-  height: 64px;
   font-size: 24px;
   display: flex;
   background: #c4c4c4;
 
-  > li {
+  &-item {
+    line-height: 64px;
+    height: 64px;
     flex: 1;
     display: flex;
     justify-content: center;

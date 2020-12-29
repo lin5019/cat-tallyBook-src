@@ -16,8 +16,8 @@ import Tabs from '@/components/Tabs.vue';
 })
 export default class Statistics extends Vue {
   intervalList = [{text: '天', value: 'day'}, {text: '周', value: 'week'}, {text: '月', value: 'month'}];
-  interval='day'
-  typeList = [{text: '支出', value: '-'},{text: '收入', value: '+'}];
+  interval = 'day';
+  typeList = [{text: '支出', value: '-'}, {text: '收入', value: '+'}];
   type = '-';
 }
 
@@ -36,5 +36,12 @@ export default class Statistics extends Vue {
   }
 
 }
+
+::v-deep .interval-tabs-item {
+    height: 48px;
+
+}
+
+
 
 </style>
