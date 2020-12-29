@@ -19,26 +19,33 @@ import Button from '@/components/Button.vue';
 
 @Component({
   components: {Button, FormItem},
-  computed: {
-    tag() {
-      return this.$store.state.currentTag;
-    }
-  }
+  // computed: {
+  //   tag() {
+  //     return this.$store.state.currentTag;
+  //   }
+  // }
 })
 export default class EditLabel extends Vue {
+  get tag() {
+    return this.$store.state.currentTag;
+  }
   created() {
+    //在tagList中找到tag,并给当前currentTag赋值
     this.$store.commit('setCurrentTag',this.$route.params.id);
-    if (!this.tag) {
+    console.log('this.tag',this.tag);
+    if (! this.tag) {
       this.$router.replace('/404');
     }
   }
 
   updateTag(name: string) {
-      this.$store.commit('updateTag',{id:this.tag.id, name})
+    console.log('this.tag.id',this.tag.id);
+      this.$store.commit('updateTag',{id: this.tag.id, name})
   }
 
   deleteTag() {
     if (this.tag) {
+      console.log('this.tag.id',this.tag.id);
       this.$store.commit('removeTag', this.tag.id)
       this.$router.go(-1);
     }
