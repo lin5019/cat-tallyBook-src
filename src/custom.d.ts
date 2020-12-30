@@ -3,11 +3,17 @@ type RecordItem = {
     notes: string;
     type: string;
     amount: number;
-    createAt?: Date; // 属性?: 表示属性不是必须的.
+    createAt?: string; // 属性?: 表示属性不是必须的.
 }
 type Tag = {
     id: string;
     name: string;
+}
+
+type RootState = {
+    recordList: RecordItem[];
+    tagList: Tag[];
+    currentTag?: Tag;
 }
 
 // type TagsListModel = {

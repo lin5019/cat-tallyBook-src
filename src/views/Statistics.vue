@@ -21,6 +21,10 @@ export default class Statistics extends Vue {
   interval = intervalList[0].value;
   typeList = typeList;
   type = typeList[0].value;
+
+  get recordList(){
+    return (this.$store.state as RootState).recordList
+  }
 }
 
 </script>
