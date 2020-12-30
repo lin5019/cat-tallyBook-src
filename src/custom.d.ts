@@ -5,6 +5,7 @@ type RecordItem = {
     amount: number;
     createAt?: string; // 属性?: 表示属性不是必须的.
 }
+
 type Tag = {
     id: string;
     name: string;
@@ -14,6 +15,15 @@ type RootState = {
     recordList: RecordItem[];
     tagList: Tag[];
     currentTag?: Tag;
+}
+
+type Items = {
+    title: string;
+    list: RecordItem[];
+}
+
+type HashTable = {
+    [key: string]: Items;
 }
 
 // type TagsListModel = {
