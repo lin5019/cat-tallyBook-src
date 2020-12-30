@@ -10,38 +10,40 @@ import Vue from 'vue';
 
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
+import intervalList from '@/constants/intervalList';
+import typeList from '@/constants/typeList';
 
 @Component({
   components: {Tabs},
 })
 export default class Statistics extends Vue {
-  intervalList = [{text: '天', value: 'day'}, {text: '周', value: 'week'}, {text: '月', value: 'month'}];
-  interval = 'day';
-  typeList = [{text: '支出', value: '-'}, {text: '收入', value: '+'}];
-  type = '-';
+  intervalList = intervalList;
+  interval = intervalList[0].value;
+  typeList = typeList;
+  type = typeList[0].value;
 }
 
 </script>
 
 <style lang="scss" scoped>
-::v-deep .type-tabs-item {
-  background: #fff;
+::v-deep {
+  .type-tabs-item {
+    background: #fff;
 
-  &.selected {
-    background: #c4c4c4;
+    &.selected {
+      background: #c4c4c4;
 
-    &::after {
-      display: none;
+      &::after {
+        display: none;
+      }
     }
   }
 
-}
-
-::v-deep .interval-tabs-item {
+  .interval-tabs-item {
     height: 48px;
+  }
 
 }
-
 
 
 </style>

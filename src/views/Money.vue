@@ -18,6 +18,7 @@ import FormItem from '@/components/Money/FormItem.vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
+import typeList from '@/constants/typeList';
 
 
 @Component({
@@ -30,12 +31,11 @@ import Tabs from '@/components/Tabs.vue';
 })
 export default class Money extends Vue {
   //type = '-'; //'-' 表示支出,'+' 表示收入
-  typeList = [{text: '支出', value: '-'},{text: '收入', value: '+'}];
-  type = '-';
+  typeList = typeList
   record: RecordItem = {
     tags: [],
     notes: '',
-    type: '-',
+    type: typeList[0].value,
     amount: 0
   };
   createRecord() {
