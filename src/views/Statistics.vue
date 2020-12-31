@@ -4,14 +4,13 @@
     <Tabs class-prefix="interval" :array.sync="intervalList" :value.sync="interval"/>
     <ul>
       <li v-for="(items,index) in result" :key="index">
-        <h3 class="title">{{ items.title }}</h3>
+        <h3 class="title">{{ index }}</h3>
         <ul>
-          <li class="record" v-for="i in items.list" :key="i.createAt">
+          <li class="record" v-for="i in items" :key="i.createAt">
             <span>{{ TagsName(i.tags) || '无' }}</span>
             <span class="notes">{{ i.notes }}你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</span>
             <span>¥{{i.amount }}</span>
           </li>
-
         </ul>
       </li>
     </ul>
@@ -43,10 +42,10 @@ export default class Statistics extends Vue {
     const {recordList} = this;
     const hashTable: HashTable = {};
     for (let i = 0; i < recordList.length; i++) {
-      const [date, time] = recordList[i].createAt.split('T');
+      const [date] = recordList[i] .createAt.split('T');
       //第一次是一个空数组,给一个初始值.
-      hashTable[date] = hashTable[date] || {title: date, list: []};
-      hashTable[date].list.push(recordList[i]);
+      hashTable[date] = hashTable[date] || [];
+      hashTable[date].push(recordList[i]);
     }
     return hashTable;
   }
@@ -55,7 +54,8 @@ export default class Statistics extends Vue {
     return (this.$store.state as RootState).tagList;
   }
 
- TagsName(ids){
+
+ TagsName(ids: []){
     const tagsName=[]
     for (let i = 0; i <ids.length ; i++) {
       const id=ids[i]

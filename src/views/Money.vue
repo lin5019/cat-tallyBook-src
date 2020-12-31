@@ -36,7 +36,8 @@ export default class Money extends Vue {
     tags: [],
     notes: '',
     type: typeList[0].value,
-    amount: 0
+    amount: 0,
+    createAt:'',
   };
   createRecord() {
     this.$store.commit('createRecord',this.record)
