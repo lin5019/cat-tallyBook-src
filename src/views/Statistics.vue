@@ -43,7 +43,7 @@ export default class Statistics extends Vue {
 
   get result() {
     const {recordList} = this;
-    const list: RecordItem[]= clone(recordList)
+    const list= clone(recordList)
     list.sort((a,b)=>{
       return dayjs(b.createAt).valueOf()-dayjs(a.createAt).valueOf()
     })
