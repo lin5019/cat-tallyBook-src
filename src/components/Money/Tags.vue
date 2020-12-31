@@ -3,8 +3,8 @@
     <ul class="tags-content">
       <li v-for="tag in tags"
           :key="tag.id"
-          @click="toggle(tag.id)"
-          :class="{selected: toggleArray.indexOf(tag.id)>-1}">
+          @click="toggle(tag)"
+          :class="{selected: toggleArray.indexOf(tag)>-1}">
         {{ tag.name }}
       </li>
     </ul>
@@ -29,19 +29,19 @@ import TagHelper from '@/mixins/TagHelper';
 })
 export default class Tags extends Mixins(TagHelper) {
 
-  toggleArray: string[] = [];
+  toggleArray: Tag[] = [];
 
   // @Watch('toggleArray')
   // onToggleArrayChanged(value: string) {
   //   this.$emit('update:value',value)
   // }
 
-  toggle(tagId: string) {
-    const index = this.toggleArray.indexOf(tagId);
+  toggle(tag: Tag) {
+    const index = this.toggleArray.indexOf(tag);
     if (index > -1) {
       this.toggleArray.splice(index, 1);
     } else {
-      this.toggleArray.push(tagId);
+      this.toggleArray.push(tag);
     }
     this.$emit('update:value',this.toggleArray)
   }
