@@ -51,7 +51,8 @@ export default class Statistics extends Vue {
     });
     const itemList: ItemList = [];
     for (let i = 0; i < list.length; i++) {
-      const [date] = list[i].createAt
+
+      const date = dayjs(list[i].createAt).format('YYYY-MM-DD')
       if (itemList.length === 0) {
         itemList.push({title: date, record: [list[i]]});
       } else {
@@ -63,6 +64,7 @@ export default class Statistics extends Vue {
         }
       }
     }
+    console.log(itemList);
     return itemList;
   }
 
@@ -80,7 +82,7 @@ export default class Statistics extends Vue {
     const day = dayjs(date);
     console.log(day.format('YYYY-MM-DD HH:mm:ss'));
     const today = dayjs();
-    console.log(day.format('YYYY-MM-DD HH:mm:ss'));
+   // console.log(day.format('YYYY-MM-DD HH:mm:ss'));
     if (day.isSame(today, 'day')) {
       return '今天';
     } else if (day.isSame(today.subtract(1, 'day'), 'day')) {
