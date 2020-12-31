@@ -25,6 +25,7 @@ import Tabs from '@/components/Tabs.vue';
 import intervalList from '@/constants/intervalList';
 import typeList from '@/constants/typeList';
 import dayjs from 'dayjs'
+import clone from '@/lib/clone';
 
 
 @Component({
@@ -42,18 +43,21 @@ export default class Statistics extends Vue {
 
   get result() {
     const {recordList} = this;
-    recordList.sort((a,b)=>dayjs(b.createAt).valueOf()-dayjs(a.createAt).valueOf())
+    const list: RecordItem[]= clone(recordList)
+    list.sort((a,b)=>{
+      return dayjs(b.createAt).valueOf()-dayjs(a.createAt).valueOf()
+    })
     const itemList: ItemList = [];
-    for (let i = 0; i < recordList.length; i++) {
-      const [date] = recordList[i] .createAt.split('T');
+    for (let i = 0; i < list.length; i++) {
+      const [date] = list[i] .createAt.split('T');
       if (itemList.length === 0) {
-        itemList.push({title: date, record: [recordList[i]]});
+        itemList.push({title: date, record: [list[i]]});
       } else {
         const item = itemList.filter(i => i.title === date)[0];
         if (item) {
-          item.record.push(recordList[i]);
+          item.record.push(list[i]);
         } else {
-          itemList.push({title: date, record: [recordList[i]]});
+          itemList.push({title: date, record: [list[i]]});
         }
       }
     }
