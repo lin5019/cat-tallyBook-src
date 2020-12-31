@@ -17,14 +17,13 @@ type RootState = {
     currentTag?: Tag;
 }
 
-// type Items = {
-//     title: string;
-//     list: RecordItem[];
-// }
-
-type HashTable = {
-    [key: string]: RecordItem[];
+type Item = {
+    title: string;
+    record: RecordItem[];
 }
+
+type ItemList = Item[]
+
 
 // type TagsListModel = {
 //     data: Tag[];
