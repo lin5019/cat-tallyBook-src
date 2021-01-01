@@ -1,12 +1,12 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :array.sync="typeList" :value.sync="type"/>
-    <Tabs class-prefix="interval" :array.sync="intervalList" :value.sync="interval"/>
+<!--    <Tabs class-prefix="interval" :array.sync="intervalList" :value.sync="interval"/>-->
     <ul>
-      <li v-for="item in result" :key="item.title">
-        <h3 class="title">{{ dateFormat(item.title) }}</h3>
+      <li v-for="group in groupedList" :key="group.title">
+        <h3 class="title">{{ dateFormat(group.title) }}</h3>
         <ul>
-          <li class="record" v-for="i in item.record" :key="i.createAt">
+          <li class="record" v-for="i in group.record" :key="i.createAt">
             <span class="tags">{{ tagsName(i.tags) || '无' }}</span>
             <span class="notes">{{
                 i.notes
@@ -24,7 +24,6 @@ import Vue from 'vue';
 
 import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
-import intervalList from '@/constants/intervalList';
 import typeList from '@/constants/typeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
@@ -34,8 +33,6 @@ import clone from '@/lib/clone';
   components: {Tabs},
 })
 export default class Statistics extends Vue {
-  intervalList = intervalList;
-  interval = intervalList[0].value;
   typeList = typeList;
   type = typeList[0].value;
 
@@ -43,15 +40,15 @@ export default class Statistics extends Vue {
     return (this.$store.state as RootState).recordList;
   }
 
-  get result() {
+  /**数据在使用之前需要clone,deepCopy**/
+  /**分别显示支出与收入类型的统计数据**/
+  get groupedList() {
     const {recordList} = this;
-    const list = clone(recordList);
-    list.sort((a, b) => {
+    const list = clone(recordList).filter(i=>i.type===this.type).sort((a, b) => {
       return dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf();
     });
     const itemList: ItemList = [];
     for (let i = 0; i < list.length; i++) {
-
       const date = dayjs(list[i].createAt).format('YYYY-MM-DD')
       if (itemList.length === 0) {
         itemList.push({title: date, record: [list[i]]});
@@ -64,7 +61,6 @@ export default class Statistics extends Vue {
         }
       }
     }
-    console.log(itemList);
     return itemList;
   }
 
@@ -80,9 +76,7 @@ export default class Statistics extends Vue {
   /*当年只显示日期,非当年显示年份 */
   dateFormat(date: string) {
     const day = dayjs(date);
-    console.log(day.format('YYYY-MM-DD HH:mm:ss'));
     const today = dayjs();
-   // console.log(day.format('YYYY-MM-DD HH:mm:ss'));
     if (day.isSame(today, 'day')) {
       return '今天';
     } else if (day.isSame(today.subtract(1, 'day'), 'day')) {
@@ -108,11 +102,12 @@ export default class Statistics extends Vue {
 
 .title {
   @extend %item;
+  background: #e5e5e5;
 }
 
 .record {
   @extend %item;
-  background: #e5e5e5;
+
   //border: 1px solid red;
   display: flex;
   //justify-content: space-around;
