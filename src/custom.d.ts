@@ -19,6 +19,7 @@ type RootState = {
 
 type Item = {
     title: string;
+    total?: number;
     record: RecordItem[];
 }
 

@@ -1,17 +1,17 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :array.sync="typeList" :value.sync="type"/>
-<!--    <Tabs class-prefix="interval" :array.sync="intervalList" :value.sync="interval"/>-->
+    <!--    <Tabs class-prefix="interval" :array.sync="intervalList" :value.sync="interval"/>-->
     <ul>
       <li v-for="group in groupedList" :key="group.title">
-        <h3 class="title">{{ dateFormat(group.title) }}</h3>
+        <h3 class="title"><span>{{ dateFormat(group.title) }}</span><span>¥ {{ group.total }}</span></h3>
         <ul>
           <li class="record" v-for="i in group.record" :key="i.createAt">
             <span class="tags">{{ tagsName(i.tags) || '无' }}</span>
             <span class="notes">{{
                 i.notes
               }}你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</span>
-            <span class="amount">¥{{ i.amount }}</span>
+            <span class="amount">¥ {{ i.amount }}</span>
           </li>
         </ul>
       </li>
@@ -44,23 +44,30 @@ export default class Statistics extends Vue {
   /**分别显示支出与收入类型的统计数据**/
   get groupedList() {
     const {recordList} = this;
-    const list = clone(recordList).filter(i=>i.type===this.type).sort((a, b) => {
+    const list = clone(recordList).filter(i => i.type === this.type).sort((a, b) => {
       return dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf();
     });
     const itemList: ItemList = [];
     for (let i = 0; i < list.length; i++) {
-      const date = dayjs(list[i].createAt).format('YYYY-MM-DD')
+      const date = dayjs(list[i].createAt).format('YYYY-MM-DD');
       if (itemList.length === 0) {
-        itemList.push({title: date, record: [list[i]]});
+        itemList.push({title: date, total: 0, record: [list[i]]});
       } else {
         const item = itemList.filter(i => i.title === date)[0];
         if (item) {
           item.record.push(list[i]);
         } else {
-          itemList.push({title: date, record: [list[i]]});
+          itemList.push({title: date, total: 0, record: [list[i]]});
         }
       }
     }
+    itemList.map(item => {
+      item.total = item.record.reduce((pre, item) => {
+        //console.log(pre,item.amount);
+        return pre + item.amount;
+      }, 0);
+      //console.log(item.total);
+    });
     return itemList;
   }
 
@@ -103,6 +110,8 @@ export default class Statistics extends Vue {
 .title {
   @extend %item;
   background: #e5e5e5;
+  display: flex;
+  justify-content: space-between;
 }
 
 .record {
