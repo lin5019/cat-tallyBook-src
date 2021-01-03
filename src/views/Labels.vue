@@ -18,7 +18,7 @@
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
-import TagHelper from '@/mixins/TagHelper';
+import {TagHelper, Loader} from '@/mixins/TagHelper';
 
 @Component({
   components: {Button},
@@ -28,7 +28,7 @@ import TagHelper from '@/mixins/TagHelper';
     }
   }
 })
-export default class Labels extends Mixins(TagHelper){
+export default class Labels extends Mixins(TagHelper,Loader){
 
 }
 </script>
@@ -54,11 +54,16 @@ export default class Labels extends Mixins(TagHelper){
   }
 }
 .createTag {
+
+
   &-wrapper{
     //border: 1px solid red;
-    text-align: center;
+    //text-align: center;
     padding: 16px;
-    margin-top: 44-16px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
 }
 

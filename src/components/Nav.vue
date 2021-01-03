@@ -26,7 +26,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 nav {
-  //border: 2px solid red;
+  //border: 1px solid red;
   display: flex;
   font-size: 16px;
   @extend %outerShadow;

@@ -9,11 +9,14 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
+import {Component, Prop} from 'vue-property-decorator';
 
-export default {
-  name: 'Layout',
-  props: ['classPrefix']
-};
+@Component
+export default class Layout extends Vue {
+  @Prop(String) classPrefix!: string;
+
+}
 </script>
 
 <style lang="scss" scoped>
@@ -29,6 +32,7 @@ export default {
     //flex只有在父容器有高度的时候才可以分配剩余空间.
     flex: 1;
     position: relative;
+
   }
 }
 

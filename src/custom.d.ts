@@ -4,6 +4,7 @@ type RecordItem = {
     type: string;
     amount: number;
     createAt: string; // 属性?: 表示属性不是必须的.
+    createError: Error | null;
 }
 
 type Tag = {

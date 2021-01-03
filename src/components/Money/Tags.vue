@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import TagHelper from '@/mixins/TagHelper';
+import {TagHelper} from '@/mixins/TagHelper';
 
 
 

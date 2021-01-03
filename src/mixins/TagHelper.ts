@@ -12,4 +12,14 @@ export class TagHelper extends Vue {
 
 }
 
-export default TagHelper
+@Component
+export class Loader extends Vue {
+    mounted(){
+        setTimeout(()=>{
+            //console.log('hi!');
+            window.scrollTo(0, 10000);
+        },0)
+    }
+}
+
+//export default TagHelper

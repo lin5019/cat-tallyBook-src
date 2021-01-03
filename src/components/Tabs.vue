@@ -1,5 +1,5 @@
 <template>
-  <ul class="tabs">
+  <ul class="tabs" :class="[classPrefix]+'-tabs'">
     <li v-for="item in array" :key="item.value"
         :class="liClass(item)"
         @click="select(item)"

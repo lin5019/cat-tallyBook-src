@@ -4,7 +4,7 @@
     <input type="text"
            :placeholder="placeholder"
            :value="value"
-            @input="$emit('update:value',$event.target.value)"/>
+            @input="OnInput"/>
   </label>
 </template>
 
@@ -15,7 +15,13 @@ import {Component, Prop} from 'vue-property-decorator';
 export default class FormItem extends Vue {
   @Prop(String) readonly value!: string
   @Prop({required: true}) fieldName!: string;
-  @Prop() placeholder?: string;
+  @Prop(String) placeholder!: string;
+
+  OnInput(e: any){
+    this.$emit('update:value',e.target.value)
+    this.$emit('update:input')
+  }
+
 }
 </script>
 

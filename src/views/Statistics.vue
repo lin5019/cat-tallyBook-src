@@ -1,8 +1,7 @@
 <template>
   <Layout>
     <Tabs class-prefix="type" :array.sync="typeList" :value.sync="type"/>
-    <!--    <Tabs class-prefix="interval" :array.sync="intervalList" :value.sync="interval"/>-->
-    <ul>
+    <ul  v-if="groupedList.length!==0">
       <li v-for="group in groupedList" :key="group.title">
         <h3 class="title"><span>{{ dateFormat(group.title) }}</span><span>¥ {{ group.total }}</span></h3>
         <ul>
@@ -16,23 +15,26 @@
         </ul>
       </li>
     </ul>
+    <div v-else class="noData">
+      <span>目前没有数据</span>
+    </div>
   </Layout>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
 
-import {Component} from 'vue-property-decorator';
+import {Component, Mixins} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import typeList from '@/constants/typeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
+import { Loader} from '@/mixins/TagHelper';
 
 
 @Component({
   components: {Tabs},
 })
-export default class Statistics extends Vue {
+export default class Statistics extends Mixins(Loader){
   typeList = typeList;
   type = typeList[0].value;
 
@@ -102,6 +104,17 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.noData {
+  //border: 1px solid red;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
+.content {
+  //margin-top: 64px;
+}
 %item {
   line-height: 24px;
   padding: 8px 10px;
@@ -143,6 +156,14 @@ export default class Statistics extends Vue {
 }
 
 ::v-deep {
+  .type-tabs {
+    //border: 1px solid red;
+    //position: fixed;
+    //top: 0;
+    //left: 0;
+    //width: 100vw;
+ 
+  }
   .type-tabs-item {
     background: #fff;
 
