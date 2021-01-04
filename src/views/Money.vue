@@ -49,15 +49,18 @@ export default class Money extends Mixins(Loader){
 
 }
 </script>
-<style>
-.layout-content {
-  display: flex;
-  flex-direction: column;
-}
-</style>
 <style lang="scss" scoped>
+
 .form {
   line-height: 64px;
   background: #f5f5f5;
 }
+::v-deep {
+  .layout-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
 </style>

@@ -4,7 +4,7 @@
     <input type="text"
            :placeholder="placeholder"
            :value="value"
-            @input="OnInput"/>
+            @input="OnInput($event.target.value)"/>
   </label>
 </template>
 
@@ -17,9 +17,9 @@ export default class FormItem extends Vue {
   @Prop({required: true}) fieldName!: string;
   @Prop(String) placeholder!: string;
 
-  OnInput(e: any){
-    this.$emit('update:value',e.target.value)
-    this.$emit('update:input')
+  OnInput(value: string){
+      this.$emit('update:value',value)
+      this.$emit('update:input')
   }
 
 }
