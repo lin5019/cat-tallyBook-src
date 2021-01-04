@@ -41,7 +41,6 @@ export default class Money extends Mixins(Loader){
     type: typeList[0].value,
     amount: 0,
     createAt:'',
-    createError:  null,
   };
   createRecord() {
     this.$store.commit('createRecord',this.record)

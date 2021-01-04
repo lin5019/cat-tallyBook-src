@@ -30,18 +30,16 @@ const store = new Vuex.Store({
                 window.alert('请给消费选择一个标签!');
                 return;
             }
-            if (!record.amount || record.amount <=0 ) {
+            if (!record.amount || record.amount <= 0) {
                 window.alert('记账输入的数字不合法!');
                 return;
             }
-            if(record.createError===null){
-                const record2 = clone(record);
-                record2.createAt = new Date().toISOString();
-                state.recordList.push(record2);
-                store.commit('recordsSave');
-            }else {
-                alert(record.createError)
-            }
+
+            const record2 = clone(record);
+            record2.createAt = new Date().toISOString();
+            state.recordList.push(record2);
+            store.commit('recordsSave');
+
         },
         tagsListFetch(state) {
             state.tagList = JSON.parse(window.localStorage.getItem(tagsList) || '[]');
@@ -57,16 +55,16 @@ const store = new Vuex.Store({
         },
         createTag(state, name: string) {
             const names = state.tagList.map((i) => i.name);
-            if (names.indexOf(name) === -1) {
-                const id: string = createId();
-                state.tagList.push({id, name});
-                store.commit('tagsListSave');
-                if (state.tagList.length > 4) {
-                    window.alert('success');
-                }
-            } else {
+            if (names.indexOf(name) !== -1) {
                 window.alert('repetition');
             }
+            const id: string = createId();
+            state.tagList.push({id, name});
+            store.commit('tagsListSave');
+            if (state.tagList.length > 4) {
+                window.alert('success');
+            }
+
         },
         removeTag(state, id: string) {
             for (let i = 0; i < state.tagList.length; i++) {
