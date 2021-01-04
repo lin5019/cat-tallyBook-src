@@ -12,7 +12,9 @@ const store = new Vuex.Store({
     state: {
         recordList: [],
         tagList: [],
-        currentTag: undefined
+        currentTag: undefined,
+        createTagError: null,
+        createRecordError: null,
     } as RootState,
     mutations: {
         init() {
@@ -27,19 +29,20 @@ const store = new Vuex.Store({
         },
         createRecord(state, record: RecordItem) {
             if (!record.tags || record.tags.length === 0) {
-                window.alert('请给消费选择一个标签!');
+                state.createRecordError = new Error('Select a label');
                 return;
             }
             if (!record.amount || record.amount <= 0) {
-                window.alert('记账输入的数字不合法!');
+                state.createRecordError = new Error('Input syntax error');
                 return;
             }
-
-            const record2 = clone(record);
-            record2.createAt = new Date().toISOString();
-            state.recordList.push(record2);
-            store.commit('recordsSave');
-
+            if (state.createRecordError === null) {
+                const record2 = clone(record);
+                record2.createAt = new Date().toISOString();
+                state.recordList.push(record2);
+                store.commit('recordsSave');
+                return;
+            }
         },
         tagsListFetch(state) {
             state.tagList = JSON.parse(window.localStorage.getItem(tagsList) || '[]');
@@ -56,15 +59,12 @@ const store = new Vuex.Store({
         createTag(state, name: string) {
             const names = state.tagList.map((i) => i.name);
             if (names.indexOf(name) !== -1) {
-                window.alert('repetition');
+                state.createTagError = new Error('tagName repetition');
+                return;
             }
             const id: string = createId();
             state.tagList.push({id, name});
             store.commit('tagsListSave');
-            if (state.tagList.length > 4) {
-                window.alert('success');
-            }
-
         },
         removeTag(state, id: string) {
             for (let i = 0; i < state.tagList.length; i++) {

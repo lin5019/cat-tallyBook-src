@@ -43,8 +43,17 @@ export default class Money extends Mixins(Loader){
     createAt:'',
   };
   createRecord() {
+    const map: {[key: string]: string}={
+      'Select a label' :'请选择一个标签',
+      'Input syntax error': '记账输入的数字不合法!',
+    }
     this.$store.commit('createRecord',this.record)
-    this.record.notes=''
+    if(this.$store.state.createRecordError){
+      window.alert(map[this.$store.state.createRecordError.message]);
+    }else {
+      window.alert('记账成功!')
+      this.record.notes=''
+    }
   }
 
 }
