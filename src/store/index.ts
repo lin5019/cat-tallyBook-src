@@ -17,7 +17,7 @@ const store = new Vuex.Store({
         createRecordError: null,
     } as RootState,
     mutations: {
-        init() {
+        init(state) {
             store.commit('tagsListFetch');
             store.commit('recordsFetch');
         },
@@ -28,6 +28,7 @@ const store = new Vuex.Store({
             window.localStorage.setItem(recordList, JSON.stringify(state.recordList));
         },
         createRecord(state, record: RecordItem) {
+            state.createRecordError = null;
             if (!record.tags || record.tags.length === 0) {
                 state.createRecordError = new Error('Select a label');
                 return;
@@ -57,6 +58,7 @@ const store = new Vuex.Store({
             window.localStorage.setItem(tagsList, JSON.stringify(state.tagList));
         },
         createTag(state, name: string) {
+            state.createTagError = null;
             const names = state.tagList.map((i) => i.name);
             if (names.indexOf(name) !== -1) {
                 state.createTagError = new Error('tagName repetition');
