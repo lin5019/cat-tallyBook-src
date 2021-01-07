@@ -22,19 +22,19 @@
 </template>
 
 <script lang="ts">
-
-import {Component, Mixins} from 'vue-property-decorator';
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
 import typeList from '@/constants/typeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
-import { Loader} from '@/mixins/TagHelper';
+
 
 
 @Component({
   components: {Tabs},
 })
-export default class Statistics extends Mixins(Loader){
+export default class Statistics extends Vue{
   typeList = typeList;
   type = typeList[0].value;
 

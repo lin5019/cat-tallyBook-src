@@ -18,7 +18,7 @@
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
-import {TagHelper, Loader} from '@/mixins/TagHelper';
+import {TagHelper} from '@/mixins/TagHelper';
 
 @Component({
   components: {Button},
@@ -28,7 +28,7 @@ import {TagHelper, Loader} from '@/mixins/TagHelper';
     }
   }
 })
-export default class Labels extends Mixins(TagHelper,Loader){
+export default class Labels extends Mixins(TagHelper){
 
 }
 </script>
